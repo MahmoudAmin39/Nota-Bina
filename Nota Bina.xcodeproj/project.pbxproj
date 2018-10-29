@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		A3A9BD1B218785D300B7206E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A9BD1A218785D300B7206E /* AppDelegate.swift */; };
-		A3A9BD1D218785D300B7206E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A9BD1C218785D300B7206E /* ViewController.swift */; };
 		A3A9BD20218785D300B7206E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3A9BD1E218785D300B7206E /* Main.storyboard */; };
 		A3A9BD23218785D300B7206E /* Nota_Bina.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3A9BD21218785D300B7206E /* Nota_Bina.xcdatamodeld */; };
 		A3A9BD25218785DB00B7206E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3A9BD24218785DB00B7206E /* Assets.xcassets */; };
 		A3A9BD28218785DB00B7206E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3A9BD26218785DB00B7206E /* LaunchScreen.storyboard */; };
+		A3A9BD302187870900B7206E /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A9BD2F2187870900B7206E /* NotesTableViewController.swift */; };
+		A3A9BD3221878E5B00B7206E /* AddAndEditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A9BD3121878E5B00B7206E /* AddAndEditNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A3A9BD17218785D300B7206E /* Nota Bina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nota Bina.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A9BD1A218785D300B7206E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A3A9BD1C218785D300B7206E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A3A9BD1F218785D300B7206E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3A9BD22218785D300B7206E /* Nota_Bina.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nota_Bina.xcdatamodel; sourceTree = "<group>"; };
 		A3A9BD24218785DB00B7206E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3A9BD27218785DB00B7206E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3A9BD29218785DB00B7206E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3A9BD2F2187870900B7206E /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		A3A9BD3121878E5B00B7206E /* AddAndEditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAndEditNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				A3A9BD1A218785D300B7206E /* AppDelegate.swift */,
-				A3A9BD1C218785D300B7206E /* ViewController.swift */,
 				A3A9BD1E218785D300B7206E /* Main.storyboard */,
 				A3A9BD24218785DB00B7206E /* Assets.xcassets */,
 				A3A9BD26218785DB00B7206E /* LaunchScreen.storyboard */,
 				A3A9BD29218785DB00B7206E /* Info.plist */,
 				A3A9BD21218785D300B7206E /* Nota_Bina.xcdatamodeld */,
+				A3A9BD2F2187870900B7206E /* NotesTableViewController.swift */,
+				A3A9BD3121878E5B00B7206E /* AddAndEditNoteViewController.swift */,
 			);
 			path = "Nota Bina";
 			sourceTree = "<group>";
@@ -138,9 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3A9BD3221878E5B00B7206E /* AddAndEditNoteViewController.swift in Sources */,
 				A3A9BD23218785D300B7206E /* Nota_Bina.xcdatamodeld in Sources */,
-				A3A9BD1D218785D300B7206E /* ViewController.swift in Sources */,
 				A3A9BD1B218785D300B7206E /* AppDelegate.swift in Sources */,
+				A3A9BD302187870900B7206E /* NotesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
