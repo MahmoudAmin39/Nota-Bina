@@ -16,9 +16,6 @@ class NotesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         notesListPresenter.getNotes { (optionalNotes) in
             self.notes.append(contentsOf: optionalNotes)
             tableView.reloadData()
@@ -47,10 +44,13 @@ class NotesTableViewController: UITableViewController {
         if let detailViewController = segue.destination as? AddAndEditNoteViewController {
             switch segue.identifier {
             case "EditNoteSegue":
-                detailViewController.title = "Edit Note"
+                if let indexPath = tableView.indexPathForSelectedRow, let note = notes[indexPath.row] {
+                    detailViewController.title = "Edit Note"
+                    detailViewController.note = note
+                }
             default:
                 detailViewController.title = "Add new Note"
-                
+
             }
         }
     }

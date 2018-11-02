@@ -9,16 +9,23 @@
 import Foundation
 
 protocol NoteDetailsPresenterType {
-    func savenote(with body: String, and color: String, and fontStyle: String, _ completion: (Error?) -> Void)
+    func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
+    func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
 }
 
 struct NoteDetailsPresenter: NoteDetailsPresenterType {
     
     let dataManager = DataManager()
     
-    func savenote(with body: String, and color: String, and fontStyle: String, _ completion: (Error?) -> Void) {
-        dataManager.savenote(with: body, and: color, and: fontStyle) { (error) in
-            completion(error)
+    func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void) {
+        dataManager.addNote(with: body, and: color, and: fontStyle) { (note, error) in
+            completion(note, error)
+        }
+    }
+    
+    func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void) {
+        dataManager.editNote(which: id, with: body, and: color, and: fontStyle) { (note, error) in
+            completion(note, error)
         }
     }
 }

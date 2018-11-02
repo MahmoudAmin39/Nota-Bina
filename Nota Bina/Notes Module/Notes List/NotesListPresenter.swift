@@ -19,7 +19,9 @@ class NotesListPresenter: NotesListPresenterType {
     
     func getNotes(_ comletion: ([Note?]) -> Void) {
         dataManager.getNotes { (noteObjects) in
-            let notes = noteObjects?.map({ Note.init(withManaged: $0)})
+            let notes = noteObjects?.map({ Note.init(withManaged: $0)}).sorted(by: { (firstNote, secondNote) -> Bool in
+                return (firstNote?.creationDate)! > (secondNote?.creationDate)!
+            })
             if let notes = notes {
                 comletion(notes)
             }

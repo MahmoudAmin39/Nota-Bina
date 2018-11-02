@@ -47,24 +47,39 @@ class AddAndEditNoteViewController: UIViewController {
         }
     }
     
-    var note: Note? {
-        didSet {
-            if let noteToPresent = note {
-                noteBodyLabel.text = noteToPresent.body
-                textColorName = noteToPresent.textColorName
-                textStyleName = noteToPresent.textStyleName
-            }
-        }
-    }
+    var note: Note?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let note = note {
+            noteBodyLabel.text = note.body
+            textColorName = note.textColorName
+            textStyleName = note.textStyleName
+        }
     }
     
     @IBAction func saveNoteAndDismiss(_ sender: Any) {
-        presenter.savenote(with: noteBodyLabel.text, and: textColorName, and: textStyleName) { (error) in
-            if error == nil {
-                self.navigationController?.popViewController(animated: true)
+        guard let id = note?.id else {
+            presenter.addNote(with: noteBodyLabel.text, and: textColorName, and: textStyleName) { [weak self] (note, error) in
+                if error == nil, let strongSelf = self {
+                    if let listViewController = strongSelf.navigationController?.viewControllers[0] as? NotesTableViewController {
+                        listViewController.notes.insert(note, at: 0)
+                        listViewController.tableView.reloadData()
+                        strongSelf.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+            return
+        }
+        
+        presenter.editNote(which: id, with: noteBodyLabel.text, and: textColorName, and: textStyleName) { [weak self] (note, error) in
+            if error == nil, let strongSelf = self {
+                if let listViewController = strongSelf.navigationController?.viewControllers[0] as? NotesTableViewController, let index = listViewController.tableView.indexPathForSelectedRow?.row {
+                    listViewController.notes[index] = note
+                    listViewController.tableView.reloadData()
+                    strongSelf.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
