@@ -10,12 +10,19 @@ import UIKit
 
 class NotesTableViewController: UITableViewController {
     
-    let words = ["Word1", "Word2", "Word3"]
-    var storyBoard: UIStoryboard?
+    // Optional note object because it is initialized with NSManagedObject through a failable init
+    var notes: [Note?] = []
+    let notesListPresenter = NotesListPresenter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        storyBoard = storyboard
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        notesListPresenter.getNotes { (optionalNotes) in
+            self.notes.append(contentsOf: optionalNotes)
+            tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
@@ -24,18 +31,16 @@ class NotesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return words.count
+        return notes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteTableViewCell", for: indexPath)
-        cell.textLabel?.text = words[indexPath.row]
-        cell.detailTextLabel?.text = words[indexPath.row]
-        return cell
-    }
-
-    @IBAction func addNote(_ sender: UIBarButtonItem) {
-        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "NoteTableViewCell", for: indexPath) as? NoteTableViewCell,
+            let note = notes[indexPath.row] {
+            cell.note = note
+            return cell
+        }
+        return UITableViewCell()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
