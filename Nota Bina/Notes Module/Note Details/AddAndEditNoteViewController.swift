@@ -60,6 +60,11 @@ class AddAndEditNoteViewController: UIViewController {
     }
     
     @IBAction func saveNoteAndDismiss(_ sender: Any) {
+        if noteBodyLabel.text.isEmpty {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
         guard let id = note?.id else {
             presenter.addNote(with: noteBodyLabel.text, and: textColorName, and: textStyleName) { [weak self] (note, error) in
                 if error == nil, let strongSelf = self, let listViewController = strongSelf.navigationController?.viewControllers[0] as? NotesTableViewController {

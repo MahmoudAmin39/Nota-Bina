@@ -73,14 +73,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOJ-JQ-d46">
-                                <rect key="frame" x="8" y="72" width="359" height="575"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Dxd-iX-98j">
-                                <rect key="frame" x="29.5" y="613" width="316" height="34"/>
+                                <rect key="frame" x="29" y="72" width="316" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j44-j4-E90">
                                         <rect key="frame" x="0.0" y="0.0" width="41" height="34"/>
@@ -147,15 +141,22 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oOJ-JQ-d46">
+                                <rect key="frame" x="8" y="126" width="359" height="521"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="oOJ-JQ-d46" firstAttribute="top" secondItem="KQk-id-iYh" secondAttribute="top" constant="8" id="9YY-FJ-2bJ"/>
-                            <constraint firstItem="Dxd-iX-98j" firstAttribute="centerX" secondItem="xSg-sp-e4N" secondAttribute="centerX" id="9hn-sr-PDY"/>
-                            <constraint firstItem="oOJ-JQ-d46" firstAttribute="leading" secondItem="KQk-id-iYh" secondAttribute="leading" constant="8" id="C6u-KG-976"/>
-                            <constraint firstItem="KQk-id-iYh" firstAttribute="trailing" secondItem="oOJ-JQ-d46" secondAttribute="trailing" constant="8" id="ocH-By-WKs"/>
-                            <constraint firstItem="KQk-id-iYh" firstAttribute="bottom" secondItem="oOJ-JQ-d46" secondAttribute="bottom" constant="20" id="wYR-JN-Z53"/>
-                            <constraint firstItem="KQk-id-iYh" firstAttribute="bottom" secondItem="Dxd-iX-98j" secondAttribute="bottom" constant="20" id="yvG-gZ-rzL"/>
+                            <constraint firstItem="KQk-id-iYh" firstAttribute="bottom" secondItem="oOJ-JQ-d46" secondAttribute="bottom" constant="20" id="0Rv-nB-Nzg"/>
+                            <constraint firstItem="Dxd-iX-98j" firstAttribute="leading" secondItem="KQk-id-iYh" secondAttribute="leading" constant="29" id="Osj-Gr-eEU"/>
+                            <constraint firstItem="Dxd-iX-98j" firstAttribute="top" secondItem="KQk-id-iYh" secondAttribute="top" constant="8" id="dD4-7d-dlF"/>
+                            <constraint firstItem="KQk-id-iYh" firstAttribute="trailing" secondItem="oOJ-JQ-d46" secondAttribute="trailing" constant="8" id="iHb-H5-zKZ"/>
+                            <constraint firstItem="oOJ-JQ-d46" firstAttribute="leading" secondItem="KQk-id-iYh" secondAttribute="leading" constant="8" id="o3e-w3-NaS"/>
+                            <constraint firstItem="KQk-id-iYh" firstAttribute="trailing" secondItem="Dxd-iX-98j" secondAttribute="trailing" constant="30" id="si0-Kq-xLK"/>
+                            <constraint firstItem="oOJ-JQ-d46" firstAttribute="top" secondItem="Dxd-iX-98j" secondAttribute="bottom" constant="20" id="vod-ku-FPF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KQk-id-iYh"/>
                     </view>
@@ -167,13 +168,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="buttonsBottomConstraint" destination="wYR-JN-Z53" id="O6O-7F-hbU"/>
                         <outlet property="noteBodyLabel" destination="oOJ-JQ-d46" id="7sC-S3-IQF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMH-ve-JdA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1119" y="115"/>
+            <point key="canvasLocation" x="1117.5999999999999" y="114.69265367316342"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="I1U-pp-PmS">

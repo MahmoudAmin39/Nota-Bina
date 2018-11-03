@@ -32,9 +32,11 @@ class NotesTableViewController: UITableViewController, UISearchResultsUpdating, 
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
         // Fetch the notes
-        notesListPresenter.getNotes { (optionalNotes) in
-            self.notes.append(contentsOf: optionalNotes)
-            self.tempNotes.append(contentsOf: optionalNotes)
+        notesListPresenter.getNotes { (optionalNotes, error) in
+            if error == nil {
+                self.notes.append(contentsOf: optionalNotes)
+                self.tempNotes.append(contentsOf: optionalNotes)
+            }
         }
     }
     

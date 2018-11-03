@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 protocol DataManagerType {
-    func getNotes(_ comletion: ([NSManagedObject]?) -> Void)
+    func getNotes(_ comletion: ([NSManagedObject]?, Error?) -> Void)
     func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
     func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
     func searchNotes(forKey word: String, _ completion: ([NSManagedObject]?, Error?) -> Void)
@@ -27,12 +27,14 @@ struct DataManager : DataManagerType {
         return appDelegate.persistentContainer.viewContext
     }
     
-    func getNotes(_ comletion: ([NSManagedObject]?) -> Void) {
+    func getNotes(_ comletion: ([NSManagedObject]?, Error?) -> Void) {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
         do {
             let notes = try self.context?.fetch(fetchRequest)
-            comletion(notes)
-        } catch _ {}
+            comletion(notes, nil)
+        } catch let error as NSError {
+            comletion(nil, error)
+        }
     }
     
     func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void) {
