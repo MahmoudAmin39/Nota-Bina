@@ -11,6 +11,7 @@ import Foundation
 protocol NotesListPresenterType {
     
     func getNotes(_ comletion: ([Note?]) -> Void)
+    func searchNotes(forKey word: String, _ completion: ([Note?], Error?) -> Void)
 }
 
 class NotesListPresenter: NotesListPresenterType {
@@ -19,11 +20,22 @@ class NotesListPresenter: NotesListPresenterType {
     
     func getNotes(_ comletion: ([Note?]) -> Void) {
         dataManager.getNotes { (noteObjects) in
-            let notes = noteObjects?.map({ Note.init(withManaged: $0)}).sorted(by: { (firstNote, secondNote) -> Bool in
-                return (firstNote?.creationDate)! > (secondNote?.creationDate)!
-            })
+            let notes = noteObjects?.map({ Note.init(withManaged: $0)}).sorted(by: {return ($0?.creationDate)! > ($1?.creationDate)!})
             if let notes = notes {
                 comletion(notes)
+            }
+        }
+    }
+    
+    func searchNotes(forKey word: String, _ completion: ([Note?], Error?) -> Void) {
+        dataManager.searchNotes(forKey: word) { (notesObjects, error) in
+            if error == nil {
+                let notes = notesObjects?.map({Note.init(withManaged: $0)}).sorted(by: {return ($0?.creationDate)! > ($1?.creationDate)!})
+                if let notes = notes {
+                    completion(notes, nil)
+                }
+            } else {
+                completion([], error)
             }
         }
     }

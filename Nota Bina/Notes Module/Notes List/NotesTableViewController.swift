@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotesTableViewController: UITableViewController {
+class NotesTableViewController: UITableViewController, UISearchResultsUpdating {
     
     // Optional note object because it is initialized with NSManagedObject through a failable init
     var notes: [Note?] = []
@@ -16,9 +16,30 @@ class NotesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Setup the search controller
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Notes"
+        // Add search controller to the navigation item
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+        // Fetch the notes
         notesListPresenter.getNotes { (optionalNotes) in
             self.notes.append(contentsOf: optionalNotes)
             tableView.reloadData()
+        }
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchTerm = searchController.searchBar.text {
+            notesListPresenter.searchNotes(forKey: searchTerm) { (notes, error) in
+                if error == nil {
+                    self.notes = notes
+                    tableView.reloadData()
+                }
+            }
         }
     }
 

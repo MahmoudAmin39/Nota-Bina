@@ -14,6 +14,7 @@ protocol DataManagerType {
     func getNotes(_ comletion: ([NSManagedObject]?) -> Void)
     func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
     func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
+    func searchNotes(forKey word: String, _ completion: ([NSManagedObject]?, Error?) -> Void)
 }
 
 struct DataManager : DataManagerType {
@@ -64,6 +65,17 @@ struct DataManager : DataManagerType {
                 try context?.save()
                 completion(Note(withManaged: noteObject), nil)
             }
+        } catch let error as NSError {
+            completion(nil, error)
+        }
+    }
+    
+    func searchNotes(forKey word: String, _ completion: ([NSManagedObject]?, Error?) -> Void) {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
+        fetchRequest.predicate = NSPredicate(format: "body CONTAINS[CD] %@", word)
+        do {
+            let notes = try context?.fetch(fetchRequest)
+            completion(notes, nil)
         } catch let error as NSError {
             completion(nil, error)
         }
