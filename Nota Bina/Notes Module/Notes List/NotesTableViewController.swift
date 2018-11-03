@@ -8,10 +8,15 @@
 
 import UIKit
 
-class NotesTableViewController: UITableViewController, UISearchResultsUpdating {
+class NotesTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     // Optional note object because it is initialized with NSManagedObject through a failable init
-    var notes: [Note?] = []
+    var notes: [Note?] = [] {
+        didSet {
+          tableView.reloadData()
+        }
+    }
+    var tempNotes: [Note?] = []
     let notesListPresenter = NotesListPresenter()
 
     override func viewDidLoad() {
@@ -21,6 +26,7 @@ class NotesTableViewController: UITableViewController, UISearchResultsUpdating {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Notes"
+        searchController.searchBar.delegate = self
         // Add search controller to the navigation item
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -28,19 +34,23 @@ class NotesTableViewController: UITableViewController, UISearchResultsUpdating {
         // Fetch the notes
         notesListPresenter.getNotes { (optionalNotes) in
             self.notes.append(contentsOf: optionalNotes)
-            tableView.reloadData()
+            self.tempNotes.append(contentsOf: optionalNotes)
         }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
         if let searchTerm = searchController.searchBar.text {
+            if searchTerm.isEmpty { return }
             notesListPresenter.searchNotes(forKey: searchTerm) { (notes, error) in
                 if error == nil {
                     self.notes = notes
-                    tableView.reloadData()
                 }
             }
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.notes = tempNotes
     }
 
     // MARK: - Table view data source
