@@ -11,6 +11,7 @@ import Foundation
 protocol NoteDetailsPresenterType {
     func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
     func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
+    func deleteNote(which id: String, _ completion: (Error?) -> Void)
 }
 
 struct NoteDetailsPresenter: NoteDetailsPresenterType {
@@ -26,6 +27,12 @@ struct NoteDetailsPresenter: NoteDetailsPresenterType {
     func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void) {
         dataManager.editNote(which: id, with: body, and: color, and: fontStyle) { (note, error) in
             completion(note, error)
+        }
+    }
+    
+    func deleteNote(which id: String, _ completion: (Error?) -> Void) {
+        dataManager.deleteNote(which: id) { (error) in
+            completion(error)
         }
     }
 }

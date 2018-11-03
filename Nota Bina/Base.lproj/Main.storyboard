@@ -161,14 +161,28 @@
                         <viewLayoutGuide key="safeArea" id="KQk-id-iYh"/>
                     </view>
                     <navigationItem key="navigationItem" id="g9B-8a-oUU">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="dFc-4E-ohq">
-                            <connections>
-                                <action selector="saveNoteAndDismiss:" destination="mfH-Xm-KRI" id="Xx3-Jf-8FB"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="save" id="dFc-4E-ohq">
+                                <connections>
+                                    <action selector="saveNoteAndDismiss:" destination="mfH-Xm-KRI" id="Xx3-Jf-8FB"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="trash" id="M7C-qm-eQ4">
+                                <connections>
+                                    <action selector="deleteNote:" destination="mfH-Xm-KRI" id="T3e-0n-wtN"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="action" id="tYH-E0-vpS">
+                                <connections>
+                                    <action selector="shareNote:" destination="mfH-Xm-KRI" id="8kx-Kr-GQT"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="M7C-qm-eQ4" id="hqa-GI-k9b"/>
                         <outlet property="noteBodyLabel" destination="oOJ-JQ-d46" id="7sC-S3-IQF"/>
+                        <outlet property="shareButton" destination="tYH-E0-vpS" id="VK7-Ug-qLT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMH-ve-JdA" userLabel="First Responder" sceneMemberID="firstResponder"/>

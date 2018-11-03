@@ -15,6 +15,7 @@ protocol DataManagerType {
     func addNote(with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
     func editNote(which id: String, with body: String, and color: String, and fontStyle: String, _ completion: (Note?, Error?) -> Void)
     func searchNotes(forKey word: String, _ completion: ([NSManagedObject]?, Error?) -> Void)
+    func deleteNote(which id: String, _ completion: (Error?) -> Void)
 }
 
 struct DataManager : DataManagerType {
@@ -80,6 +81,20 @@ struct DataManager : DataManagerType {
             completion(notes, nil)
         } catch let error as NSError {
             completion(nil, error)
+        }
+    }
+    
+    func deleteNote(which id: String, _ completion: (Error?) -> Void) {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Note")
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            let note = try self.context?.fetch(fetchRequest)
+            if let noteObject = (note?[0]) {
+                context?.delete(noteObject)
+                completion(nil)
+            }
+        } catch let error as NSError {
+            completion(error)
         }
     }
 }

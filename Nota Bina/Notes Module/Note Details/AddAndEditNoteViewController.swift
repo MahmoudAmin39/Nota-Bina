@@ -12,6 +12,8 @@ class AddAndEditNoteViewController: UIViewController {
     
     @IBOutlet weak var noteBodyLabel: UITextView!
     @IBOutlet weak var buttonsBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     let presenter = NoteDetailsPresenter()
     
@@ -56,6 +58,9 @@ class AddAndEditNoteViewController: UIViewController {
             noteBodyLabel.text = note.body
             textColorName = note.textColorName
             textStyleName = note.textStyleName
+        } else {
+            shareButton.isEnabled = false
+            deleteButton.isEnabled = false
         }
     }
     
@@ -80,13 +85,30 @@ class AddAndEditNoteViewController: UIViewController {
             if error == nil, let strongSelf = self {
                 if let listViewController = strongSelf.navigationController?.viewControllers[0] as? NotesTableViewController, let index = listViewController.tableView.indexPathForSelectedRow?.row {
                     listViewController.notes[index] = note
-                    listViewController.tableView.reloadData()
                     strongSelf.navigationController?.popViewController(animated: true)
                 }
             }
         }
     }
-
+    
+    @IBAction func deleteNote(_ sender: UIBarButtonItem) {
+        if let id = note?.id {
+            presenter.deleteNote(which: id) { [weak self] (error) in
+                if error == nil, let strongSelf = self {
+                    if let listViewController = strongSelf.navigationController?.viewControllers[0] as? NotesTableViewController, let index = listViewController.tableView.indexPathForSelectedRow?.row {
+                        listViewController.notes.remove(at: index)
+                        strongSelf.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBAction func shareNote(_ sender: Any) {
+        let shareVC = UIActivityViewController(activityItems: [note?.body as Any], applicationActivities: nil)
+        present(shareVC, animated: true, completion: nil)
+    }
+    
     @IBAction func colorClicked(_ button: UIButton) {
         if let buttonText = button.titleLabel?.text {
             textColorName = buttonText
